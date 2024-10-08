@@ -6,7 +6,7 @@ const path = require('path');
  * @param relativePath 相对路径
  * @returns {string[]|*[]} 文件名数组
  */
-function findMdFiles(relativePath) {
+function findMdFiles(relativePath, filePrefix) {
     const directoryPath = path.join(process.cwd() + '/docs/', relativePath); // 使用process.cwd()来获取当前工作目录并构建目录路径
 
     try {
@@ -15,7 +15,13 @@ function findMdFiles(relativePath) {
         // 筛选出以.md为后缀的文件名并排除README.md
         const mdFiles = files
             .filter((file) => file.endsWith('.md') && file !== 'README.md')
-            .map((file) => path.parse(file).name);
+            .map((file) => {
+                if (filePrefix) {
+                    return filePrefix + '/' + path.parse(file).name
+                } else {
+                    return path.parse(file).name
+                }
+            });
 
         // 按照从大到小排序
         mdFiles.sort((a, b) => {

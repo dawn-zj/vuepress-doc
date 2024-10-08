@@ -22,8 +22,12 @@ module.exports = {
       '/view/comps/': [
           '', // 视为*/README.md
         {
-          title: '文档',
+          title: '自定义组件',
           children: path.findMdFiles('/view/comps/')
+        },
+        {
+          title: 'ElementUI组件',
+          children: path.findMdFiles('/view/comps/element', 'element')
         }
       ]
     }
