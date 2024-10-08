@@ -58,3 +58,68 @@ export default {
 ```
 :::
 
+## 搜索区
+:::demo
+```html
+<template>
+    <el-form ref="queryForm" :inline="true" :model="queryForm" label-width="100px">
+        <el-form-item label="条件1">
+            <el-input v-model="queryForm.q1" />
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" icon="el-icon-search" @click="handleQuery">搜索</el-button>
+        </el-form-item>
+        <el-form-item>
+            <el-button icon="el-icon-refresh-left" @click="resetQuery">重置</el-button>
+        </el-form-item>
+        <el-button type="text" @click="foldHandle"> {{ fText }}</el-button>
+        
+        <div v-if="isOpen">
+            <el-form-item label="条件2">
+                <el-input v-model="queryForm.q2" />
+            </el-form-item>
+            <el-form-item label="条件3">
+                <el-input v-model="queryForm.q3" />
+            </el-form-item>
+        </div>
+    </el-form>
+
+
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            isOpen: false,
+            fText: '更多',
+            queryForm: {
+                q1: '',
+                q2: '',
+                q3: ''
+            }
+        }
+    },
+    created() {
+    },
+    methods: {
+        foldHandle() {
+            this.isOpen = !this.isOpen;
+            this.fText = this.isOpen ? '收起' : '更多'
+        },
+        handleQuery() {
+            this.$message('已点击按钮')
+        },
+        resetQuery() {
+            this.queryForm.q1 = '';
+            this.queryForm.q2 = '';
+            this.queryForm.q3 = '';
+            this.$refs.queryForm.resetFields()
+        }
+    }
+}
+</script>
+
+```
+:::
+
