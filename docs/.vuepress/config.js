@@ -1,4 +1,6 @@
 // 官网 https://www.vuepress.cn/zh/theme/default-theme-config.html
+const path = require('../utils/index.js');
+
 module.exports = {
   theme: '',
   title: 'VuePress + Element',
@@ -18,13 +20,11 @@ module.exports = {
     ],
     sidebar: {
       '/view/comps/': [
-        '', // 视为*/README.md
-        'select',
-        'table',
-        'card',
-        'dialog',
-        'form',
-        'windows之qemu'
+          '', // 视为*/README.md
+        {
+          title: '文档',
+          children: path.findMdFiles('/view/comps/')
+        }
       ]
     }
   },
